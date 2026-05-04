@@ -212,9 +212,17 @@ nav{
   .frow{grid-template-columns:1fr;}
   .site-footer{padding:1.5rem;flex-direction:column;gap:0.5rem;text-align:center;margin-top:2rem;}
 }
+
+#mouse-glow{
+  pointer-events:none;position:fixed;width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(99,102,241,0.1) 0%,rgba(139,92,246,0.05) 40%,transparent 70%);
+  transform:translate(-50%,-50%);transition:left 0.12s ease,top 0.12s ease;
+  z-index:0;top:50%;left:50%;
+}
 </style>
 </head>
 <body>
+<div id="mouse-glow"></div>
 
 <nav>
   <a class="nav-logo" onclick="showPage('home')">Abhinav Kovoori</a>
@@ -510,6 +518,13 @@ nav{
   }
   animate();
 })();
+
+// MOUSE GLOW
+const glow = document.getElementById('mouse-glow');
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top  = e.clientY + 'px';
+});
 
 // ── NAV ──
 function showPage(id,btn){
